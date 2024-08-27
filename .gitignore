@@ -1,0 +1,13 @@
+node_modules
+vendor
+cache/*
+README.md
+.vscode
+npm-debug.log
+logs/*
+public/css/*
+public/img/modulos/*
+public/img/firmas/*
+public/archive/*
+.env
+.scannerwork/

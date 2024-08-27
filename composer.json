@@ -1,0 +1,25 @@
+{
+  "name": "wil/glint",
+  "description": "Framework PHP",
+  "type": "project",
+  "require": {
+    "illuminate/database": "12.x-dev",
+    "eftec/bladeone": "dev-master",
+    "phpoffice/phpspreadsheet": "dev-master",
+    "phpmailer/phpmailer": "dev-master"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "Migrations\\": "migrations/",
+      "Lib\\": "lib/"
+    }
+  },
+  "authors": [
+    {
+      "name": "wilcastell"
+    }
+  ],
+  "minimum-stability": "dev"
+}

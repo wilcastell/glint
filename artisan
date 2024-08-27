@@ -1,0 +1,30 @@
+#!/usr/bin/env php
+<?php
+
+require_once 'vendor/autoload.php';
+require_once 'lib/Env.php'; // Environment variables
+require_once 'config/database.php'; // Database configuration
+
+
+use App\Console\CommandRegistry;
+use App\Console\Commands\MakeControllerCommand;
+use App\Console\Commands\MakeModelCommand;
+use App\Console\Commands\MakeMigrationCommand;
+use App\Console\Commands\MigrateCommand;
+use App\Console\Commands\MigrateRollbackCommand;
+use App\Console\Commands\MigrateRefreshCommand;
+
+$commandRegistry = new CommandRegistry();
+$commandRegistry->registerCommands([
+  'make:controller' => MakeControllerCommand::class,
+  'make:model' => MakeModelCommand::class,
+  'make:migration' => MakeMigrationCommand::class,
+  'migrate' => MigrateCommand::class,
+  'migrate:refresh' => MigrateRefreshCommand::class,
+  'migrate:rollback' => MigrateRollbackCommand::class,
+]);
+
+$command = $argv[1] ?? null;
+$args = array_slice($argv, 2);
+
+$commandRegistry->run($command, $args);
