@@ -15,6 +15,10 @@ class AuthTest extends TestCase
       define('BASE_URL', getenv('BASE_URL'));
     }
 
+    if (!defined('APP_URL')) {
+      define('APP_URL', getenv('APP_URL'));
+    }
+
     // Inicializa la sesión antes de cada prueba.
     if (session_status() == PHP_SESSION_NONE) {
       session_start();

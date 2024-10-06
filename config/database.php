@@ -11,13 +11,15 @@ $dbPass = getenv('DB_PASS');
 $dbName = getenv('DB_NAME');
 $dbPrefix = getenv('DB_PREFIX');
 $baseURL = getenv('BASE_URL');
+$domain = getenv('APP_URL');
 
 // Verificar si las variables de entorno se cargaron correctamente
-if (!$dbHost || !$dbUser || !$dbName) {
+if (!$dbHost || !$dbUser || !$dbName || !$domain || !$baseURL) {
     die('Error: Las variables de entorno para la base de datos no se cargaron correctamente.');
 }
 
 define('BASE_URL', $baseURL);
+define('DOMAIN', $domain);
 
 $capsule->addConnection([
     'driver'    => 'mysql',

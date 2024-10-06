@@ -22,18 +22,18 @@ class AuthController extends Controller
 {
 
     protected $token;
-    const LOGIN = '/login';
-    const RESET = '/password/reset/';
-    const REGISTER = '/register';
-    const SUCCESS = '/success';
-    const LOGOUT = '/logout';
-    const HOME = '/';
-    const EMAIL = '/password/email';
+    const LOGIN = 'login';
+    const RESET = 'password/reset/';
+    const REGISTER = 'register';
+    const SUCCESS = 'success';
+    const LOGOUT = 'logout';
+    const HOME = 'home';
+    const EMAIL = 'password/email';
 
     /**
      * Muestra el formulario de inicio de sesión.
      *
-     * @return \Illuminate\View\View
+     * @return $this->view
      */
     public function showLoginForm()
     {
@@ -48,7 +48,7 @@ class AuthController extends Controller
     /**
      * Muestra el formulario de registro.
      *
-     * @return \Illuminate\View\View
+     * @return $this->view
      */
     public function showRegisterForm()
     {
@@ -76,15 +76,16 @@ class AuthController extends Controller
         ];
 
         $messages = [
-            'name.required' => 'El nombre de usuario es obligatorio',
-            'name.min' => 'El nombre de usuario debe tener al menos 3 caracteres',
-            'name.max' => 'El nombre de usuario es demasiado largo',
+            'name.required' => 'El {field} es obligatorio',
+            'name.min' => 'El {field} debe tener al menos 3 caracteres',
+            'name.max' => 'El {field} es demasiado largo',
             'password.confirmed' => 'La confirmación de la contraseña no coincide',
-            'email.unique' => 'El email ya está registrado',
+            'email.unique' => 'El Email ya está registrado',
         ];
 
         $attributes = [
-            'name' => 'Nombre',
+            'name' => 'Nombre de usuario',
+            'email' => 'Email',
             'password' => 'Contraseña'
         ];
 
@@ -113,7 +114,7 @@ class AuthController extends Controller
     /**
      * Muestra la vista de éxito después de un registro o acción exitosa.
      *
-     * @return \Illuminate\View\View
+     * @return $this->view
      */
     public function success()
     {
@@ -161,7 +162,7 @@ class AuthController extends Controller
     /**
      * Muestra la vista de acceso no autorizado.
      *
-     * @return \Illuminate\View\View
+     * @return $this->view
      */
     public function unauthorized()
     {
@@ -171,7 +172,7 @@ class AuthController extends Controller
     /**
      * Muestra la vista del popup de cierre de sesión.
      *
-     * @return \Illuminate\View\View
+     * @return $this->view
      */
     public function logoutpopup()
     {
@@ -193,7 +194,7 @@ class AuthController extends Controller
     /**
      * Muestra el formulario de solicitud de restablecimiento de contraseña.
      *
-     * @return \Illuminate\View\View
+     * @return $this->view
      */
     public function showResetRequestForm()
     {
@@ -262,7 +263,7 @@ class AuthController extends Controller
             'token' => $token,
             'email' => $email,
             'resetLink' => $resetLink
-        ], true);
+        ]);
 
         $mailer->send($email, $subject, $body);
     }
@@ -272,7 +273,7 @@ class AuthController extends Controller
      *
      * @param Request $request
      * @param string $token
-     * @return \Illuminate\View\View
+     * @return $this->view
      * @throws InvalidTokenException
      */
     public function showResetForm(Request $request, $token)
@@ -302,9 +303,10 @@ class AuthController extends Controller
     public function resetPassword(Request $request)
     {
         if ($this->validateResetRequest($request)) {
-            return $this->handleReset($request);
+            $this->handleReset($request);
+        } else {
+            redirect(self::RESET . $request->input('token'))->with('error', $_SESSION['errors']);
         }
-        redirect(self::RESET . $request->input('token'))->with('error', $_SESSION['errors']);
     }
 
     /**
@@ -365,6 +367,7 @@ class AuthController extends Controller
 
         $_SESSION['success'] = 'Tu contraseña ha sido restablecida correctamente.';
         redirect(self::HOME);
+        return true;
     }
 
     /**

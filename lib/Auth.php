@@ -44,7 +44,7 @@ class Auth
   public static function requireAuth()
   {
     if (!self::check()) {
-      header('Location: ' . BASE_URL . '/login');
+      header('Location: ' . DOMAIN . BASE_URL . 'login');
       exit;
     }
   }
@@ -92,7 +92,7 @@ class Auth
   {
     if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 3600)) {
       self::logout();
-      header('Location: ' . BASE_URL . '/login');
+      header('Location: ' . DOMAIN . BASE_URL . 'login');
       exit;
     }
     $_SESSION['last_activity'] = time();

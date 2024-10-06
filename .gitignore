@@ -9,6 +9,7 @@ public/css/*
 public/img/modulos/*
 public/img/firmas/*
 public/archive/*
+public/memorias/*
 .env
 .scannerwork/
 .phpunit.result.cache

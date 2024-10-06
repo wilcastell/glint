@@ -94,10 +94,10 @@
                         class="block w-full px-4 py-3 pr-12 text-white bg-input-bg rounded-full
                             focus:border-blue-400 focus:ring-opacity-40 focus:outline-none focus:ring
                             focus:ring-blue-300 border-0 placeholder:text-white">
-                        <option value="user">Usuario</option>
-                        <option value="admin">Administrador</option>
-                        <option value="capacitador">Capacitador</option>
-                        <option value="verificador">Verificador de asistencia</option>
+                        <option value="user" class="text-black">Usuario</option>
+                        <option value="admin" class="text-black">Administrador</option>
+                        <option value="capacitador" class="text-black">Capacitador</option>
+                        <option value="verificador" class="text-black">Verificador de asistencia</option>
                     </select>
                 </div>
                 <!-- Registrarse -->

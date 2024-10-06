@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    'resources/views/**/*.{php, blade.php}',
-    './node_modules/flowbite/**/*.js',
-  ],
+  content: ['resources/views/**/*.{php, blade.php}', './node_modules/flowbite/**/*.js'],
   theme: {
     extend: {
       fontFamily: {
@@ -42,6 +39,7 @@ module.exports = {
         'amarillo-claro': { DEFAULT: '#D99938' },
         'azul-claro': { DEFAULT: '#6A9BFF' },
         'verde-firma': { DEFAULT: '#579E44' },
+        'title-reportes': { DEFAULT: '#31394D' },
 
         // colores rgba
         'verde-transparent': { DEFAULT: 'rgba(95, 206, 144, 0.2)' },
@@ -77,10 +75,17 @@ module.exports = {
         'custom-br1': '0px 60px 60px 0px',
         'custom-br2': '60px',
       },
+      hidden: {
+        'custom-fields-virtual': 'hidden',
+      },
       height: {
         432: '432px',
       },
     },
   },
-  plugins: [require('flowbite/plugin')],
+  plugins: [
+    require('flowbite/plugin')({
+      charts: true,
+    }),
+  ],
 };
